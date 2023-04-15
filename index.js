@@ -23,13 +23,24 @@ submitBtn.addEventListener("click", () => {
 
   push(values, inputValue);
   console.log(`${inputValue} added to database`);
-  appendListElem(inputValue);
+  // appendListElem(inputValue);
   clear();
 
   onValue(values, function (snapshot) {
-    console.log(snapshot.val());
+    // console.log(snapshot.val());
+    var itemsArray = Object.values(snapshot.val());
+    clearListEl();
+    for (let i = 0; i < itemsArray.length; i++) {
+      appendListElem(itemsArray[i]);
+      console.log(itemsArray[i]);
+    }
   });
 });
+
+function clearListEl() {
+  document.getElementById("shopList").innerHTML = "";
+}
+
 function clear() {
   input.value = "";
 }
